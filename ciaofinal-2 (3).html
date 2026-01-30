@@ -1,0 +1,2943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> CIAO constitution heroes - Learn Through Play!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Splash Screen */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .splash-logo {
+            font-size: 8rem;
+            color: white;
+            text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        .splash-text {
+            font-size: 2.5rem;
+            color: white;
+            font-weight: 700;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .splash-subtext {
+            font-size: 1.2rem;
+            color: white;
+            margin-top: 10px;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 90vh;
+        }
+
+        .header {
+            background: linear-gradient(to right, #667eea, #764ba2);
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .age-group {
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            flex: 1;
+        }
+
+        /* Login Screen Styles */
+        .login-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .login-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .login-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #888;
+        }
+
+        .login-tab.active {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            font-weight: bold;
+        }
+
+        .login-form {
+            display: none;
+        }
+
+        .login-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .login-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .skip-button {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: #6c757d;
+            border: 2px solid #6c757d;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .skip-button:hover {
+            background: #6c757d;
+            color: white;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .feature {
+            max-width: 200px;
+        }
+
+        .feature i {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        /* Dashboard Styles */
+        .dashboard-screen {
+            display: none;
+            flex-direction: column;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .user-avatar i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .logout-button {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .dashboard-content {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .nav-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .nav-item.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-item:hover:not(.active) {
+            background: #e9ecef;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .progress-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .progress-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .progress-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .progress-bar-container {
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            border-radius: 10px;
+        }
+
+        .progress-percentage {
+            text-align: right;
+            font-weight: bold;
+            color: #4facfe;
+        }
+
+        .ai-tutor {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            display: flex;
+        }
+
+        .tutor-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .tutor-avatar i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .tutor-message {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 15px;
+            position: relative;
+            flex-grow: 1;
+        }
+
+        .tutor-message:before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 8px 16px 8px 0;
+            border-style: solid;
+            border-color: transparent #f8f9fa transparent transparent;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .action-button {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .action-button i {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .achievements {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .achievement-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .achievement-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .achievement-item i {
+            font-size: 2rem;
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        /* Game screens */
+        .game-screen {
+            display: none;
+            padding: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 0.9rem;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        /* Constitutional Games Styles */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border-left: 5px solid;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .rights-hero { border-left-color: #ff6b6b; }
+        .scenario-solver { border-left-color: #4ecdc4; }
+        .democracy-builder { border-left-color: #45b7d1; }
+        .constitution-quiz { border-left-color: #96ceb4; }
+
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .rights-hero .game-icon { color: #ff6b6b; }
+        .scenario-solver .game-icon { color: #4ecdc4; }
+        .democracy-builder .game-icon { color: #45b7d1; }
+        .constitution-quiz .game-icon { color: #96ceb4; }
+
+        .game-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .game-description {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Game Header */
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .back-button {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: #5a6268;
+        }
+
+        .score-display {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        /* Rights Hero Game */
+        .hero-character {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            color: white;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .rights-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .right-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .right-card:hover {
+            background: #e9ecef;
+            transform: scale(1.05);
+        }
+
+        .right-card.selected {
+            border-color: #ff6b6b;
+            background: #fff5f5;
+        }
+
+        .right-card .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #ff6b6b;
+        }
+
+        /* Scenario Solver Game */
+        .scenario-container {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .scenario-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .scenario-image {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            margin: 0 auto 20px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .option-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .option-card:hover {
+            border-color: #4ecdc4;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.2);
+        }
+
+        .option-card.selected {
+            border-color: #4ecdc4;
+            background: #f0fdfc;
+        }
+
+        .option-card.correct {
+            border-color: #28a745;
+            background: #f8fff8;
+        }
+
+        .option-card.incorrect {
+            border-color: #dc3545;
+            background: #fff8f8;
+        }
+
+        /* Democracy Builder Game */
+        .voting-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .voting-topic {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .voting-topic h3 {
+            color: #45b7d1;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .vote-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .vote-option {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .vote-option:hover {
+            border-color: #45b7d1;
+            transform: scale(1.05);
+        }
+
+        .vote-option.voted {
+            border-color: #45b7d1;
+            background: #f0f9ff;
+        }
+
+        .vote-results {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .result-bar {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .result-label {
+            min-width: 120px;
+            font-weight: bold;
+        }
+
+        .result-progress {
+            flex: 1;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin: 0 10px;
+            overflow: hidden;
+        }
+
+        .result-fill {
+            height: 100%;
+            background: #45b7d1;
+            transition: width 1s ease-in-out;
+        }
+
+        .result-count {
+            font-weight: bold;
+            color: #45b7d1;
+        }
+
+        /* Quiz Game */
+        .quiz-question {
+            background: linear-gradient(135deg, #96ceb4, #8FBC8F);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            line-height: 1.6;
+        }
+
+        .quiz-answers {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .quiz-answer {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            font-size: 1.1rem;
+        }
+
+        .quiz-answer:hover {
+            border-color: #96ceb4;
+            background: #f9fff9;
+        }
+
+        .quiz-answer.selected {
+            border-color: #96ceb4;
+            background: #f0fff0;
+        }
+
+        .quiz-answer.correct {
+            border-color: #28a745;
+            background: #f8fff8;
+        }
+
+        .quiz-answer.incorrect {
+            border-color: #dc3545;
+            background: #fff8f8;
+        }
+
+        /* Common Elements */
+        .submit-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .submit-button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1rem;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .next-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .progress-container {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.5s ease-in-out;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+            
+            .progress-cards, .quick-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-tutor {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .tutor-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .tutor-message:before {
+                left: 50%;
+                top: -15px;
+                transform: translateX(-50%);
+                border-width: 0 8px 16px 8px;
+                border-color: transparent transparent #f8f9fa transparent;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .splash-logo {
+                font-size: 5rem;
+            }
+            
+            .splash-text {
+                font-size: 1.8rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .options-grid, .vote-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .rights-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation for objects */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .counting-object, .letter-object {
+            animation: bounce 2s infinite;
+        }
+
+        .counting-object:nth-child(2), .letter-object:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .counting-object:nth-child(3), .letter-object:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .counting-object:nth-child(4), .letter-object:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .counting-object:nth-child(5), .letter-object:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        /* Confetti effect */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0.7;
+            border-radius: 0;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .letter-button {
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            margin: 5px;
+            border: 2px solid #ced4da;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .letter-button:hover {
+            background: #e9ecef;
+            transform: scale(1.1);
+        }
+
+        .letter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        /* Game specific styles */
+        .main-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.4rem;
+            color: #333;
+        }
+
+        .activities {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .activity-card {
+            width: 220px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .activity-header {
+            padding: 15px;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .math-header {
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .english-header {
+            background: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+        }
+
+        .poems-header {
+            background: linear-gradient(to right, #7f00ff 0%, #e100ff 100%);
+        }
+
+        .constitution-header {
+            background: linear-gradient(to right, #667eea 0%, #764ba2 100%);
+        }
+
+        .activity-body {
+            padding: 15px;
+            text-align: center;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .activity-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .math-icon {
+            color: #4facfe;
+        }
+
+        .english-icon {
+            color: #ff758c;
+        }
+
+        .poems-icon {
+            color: #7f00ff;
+        }
+
+        .constitution-icon {
+            color: #667eea;
+        }
+
+        .tutor-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confetti-fall 3s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splash-screen">
+        <div class="splash-logo">🏛️</div>
+        <div class="splash-text"> CIAO </div> 
+        <div class="splash-subtext">Learn through Play!</div>
+    </div>
+    
+    <div class="container">
+        <!-- Login Screen -->
+        <div class="login-screen" id="login-screen">
+            <div class="login-container">
+                <h1 class="logo">🏛️</h1>
+                <p class="subtitle"> CIAO  Constitutional Heroes - Learn through Play!</p>
+                
+                <div class="login-tabs">
+                    <div class="login-tab active" onclick="showLoginForm('signin')">Sign In</div>
+                    <div class="login-tab" onclick="showLoginForm('signup')">Sign Up</div>
+                </div>
+                
+                <div class="login-form active" id="signin-form">
+                    <div class="form-group">
+                        <label>Parent's Email</label>
+                        <input type="email" placeholder="parent@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Enter password">
+                    </div>
+                    <button class="login-button" onclick="login()">Start Learning!</button>
+                    <button class="skip-button" onclick="skipLogin()">
+                        <i class="fas fa-forward"></i> Skip & Explore
+                    </button>
+                </div>
+                
+                <div class="login-form" id="signup-form">
+                    <div class="form-group">
+                        <label>Child's Name</label>
+                        <input type="text" placeholder="Enter your child's name">
+                    </div>
+                    <div class="form-group">
+                        <label>Age</label>
+                        <input type="number" placeholder="Age (3-7)" min="3" max="7">
+                    </div>
+                    <div class="form-group">
+                        <label>Parent's Email</label>
+                        <input type="email" placeholder="parent@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Enter password">
+                    </div>
+                    <button class="login-button" onclick="signup()">Create Account & Start!</button>
+                    <button class="skip-button" onclick="skipLogin()">
+                        <i class="fas fa-forward"></i> Skip & Explore
+                    </button>
+                </div>
+                
+                <p class="age-group">Safe, secure, and designed for kids aged 3-17</p>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Interactive Learning</h3>
+                    <p>Engaging games and activities</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-child"></i>
+                    <h3>Kid-Friendly</h3>
+                    <p>Designed for young learners</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Gamified Fun</h3>
+                    <p>Earn rewards and achievements</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dashboard Screen -->
+        <div class="dashboard-screen" id="dashboard-screen">
+            <div class="dashboard-header">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <div>
+                        <h3>Emily</h3>
+                        <p>Age 5</p>
+                    </div>
+                </div>
+                <button class="logout-button" onclick="logout()">Logout</button>
+            </div>
+            
+            <div class="dashboard-content">
+                <div class="sidebar">
+                    <div class="nav-item active" onclick="showSection('dashboard')">
+                        <i class="fas fa-home"></i> Dashboard
+                    </div>
+                    <div class="nav-item" onclick="showGame('math')">
+                        <i class="fas fa-calculator"></i> Math Adventure
+                    </div>
+                    <div class="nav-item" onclick="showGame('english')">
+                        <i class="fas fa-book"></i> Word World
+                    </div>
+                    <div class="nav-item" onclick="showGame('poems')">
+                        <i class="fas fa-music"></i> Poetry Corner
+                    </div>
+                    <div class="nav-item" onclick="showGame('constitution')">
+                        <i class="fas fa-landmark"></i> Constitution Heroes
+                    </div>
+                    <div class="nav-item" onclick="showSection('progress')">
+                        <i class="fas fa-chart-line"></i> Progress Report
+                    </div>
+                    <div class="nav-item" onclick="showSection('settings')">
+                        <i class="fas fa-cog"></i> Settings
+                    </div>
+                </div>
+                
+                <div class="main-content">
+                    <div class="welcome-banner">
+                        <h2>Welcome back, user!</h2>
+                        <p>Ready for some fun learning today?</p>
+                    </div>
+                    
+                    <h3>Your Learning Program</h3>
+                    <div class="progress-cards">
+                        <div class="progress-card">
+                            <div class="progress-title">Math</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 65%"></div>
+                            </div>
+                            <div class="progress-percentage">65%</div>
+                        </div>
+                        
+                        <div class="progress-card">
+                            <div class="progress-title">English</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 44%"></div>
+                            </div>
+                            <div class="progress-percentage">44%</div>
+                        </div>
+                        
+                        <div class="progress-card">
+                            <div class="progress-title">Rhythm</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 25%"></div>
+                            </div>
+                            <div class="progress-percentage">25%</div>
+                        </div>
+
+                        <div class="progress-card">
+                            <div class="progress-title">Constitution</div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: 30%"></div>
+                            </div>
+                            <div class="progress-percentage">30%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-tutor">
+                        <div class="tutor-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="tutor-message">
+                            <p>Hi user! I'm your COCO ! 😊 I'm here to help you learn math, English, fun songs, and all about your rights! What would you like to explore today?</p>
+                        </div>
+                    </div>
+                    
+                    <h3>Quick Actions</h3>
+                    <div class="quick-actions">
+                        <div class="action-button" onclick="showGame('math')">
+                            <i class="fas fa-calculator"></i>
+                            <p>Math Fun</p>
+                            <small>Numbers, counting & simple math</small>
+                        </div>
+                        
+                        <div class="action-button" onclick="showGame('english')">
+                            <i class="fas fa-book"></i>
+                            <p>Word World</p>
+                            <small>Letters, words & spelling</small>
+                        </div>
+                        
+                        <div class="action-button" onclick="showGame('poems')">
+                            <i class="fas fa-music"></i>
+                            <p>Rhythm Time</p>
+                            <small>Songs, poems & movements</small>
+                        </div>
+                        
+                        <div class="action-button" onclick="showGame('constitution')">
+                            <i class="fas fa-landmark"></i>
+                            <p>CIAO</p>
+                            <small>Learn about rights & fairness</small>
+                        </div>
+                    </div>
+                    
+                    <h3>Recent Achievements</h3>
+                    <div class="achievements">
+                        <div class="achievement-list">
+                            <div class="achievement-item">
+                                <i class="fas fa-medal"></i>
+                                <h4>First Steps</h4>
+                                <p>Started your learning journey!</p>
+                            </div>
+                            
+                            <div class="achievement-item">
+                                <i class="fas fa-calculator"></i>
+                                <h4>Math Explorer</h4>
+                                <p>Completed 10 math exercises</p>
+                            </div>
+                            
+                            <div class="achievement-item">
+                                <i class="fas fa-book"></i>
+                                <h4>Word Wizard</h4>
+                                <p>Learned 25 new words</p>
+                            </div>
+
+                            <div class="achievement-item">
+                                <i class="fas fa-landmark"></i>
+                                <h4>Rights Defender</h4>
+                                <p>Completed your first rights mission</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Math Game Screen -->
+        <div id="math-game" class="game-screen">
+            <div class="game-header">
+                <button class="back-button" onclick="showDashboard()">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+                <h2>Math Adventure</h2>
+                <div class="score-display">Score: <span id="math-score">0</span>/5</div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="math-progress" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">Question <span id="math-current">1</span> of 5</div>
+            </div>
+
+            <div class="game-content math-game">
+                <h3 class="game-title">Counting Fun!</h3>
+                <p>How many objects do you see? Count them and enter the number!</p>
+                
+                <div class="counting-objects" id="counting-objects">
+                    <!-- Objects will be generated here -->
+                </div>
+                
+                <div class="answer-section">
+                    <input type="number" class="answer-input" id="math-answer" min="1" max="20">
+                    <button class="submit-button" onclick="checkMathAnswer()">Check Answer</button>
+                </div>
+                
+                <div class="feedback" id="math-feedback"></div>
+            </div>
+            
+            <div class="tutor-section">
+                <div class="tutor-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="tutor-message" id="math-tutor-message">
+                    <p>Great choice! Math is fun! Let's count these cute objects together!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- English Game Screen -->
+        <div id="english-game" class="game-screen">
+            <div class="game-header">
+                <button class="back-button" onclick="showDashboard()">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+                <h2>Word World</h2>
+                <div class="score-display">Score: <span id="english-score">0</span>/5</div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="english-progress" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">Question <span id="english-current">1</span> of 5</div>
+            </div>
+
+            <div class="game-content english-game">
+                <h3 class="game-title" id="english-title">Letter Matching</h3>
+                <p id="english-instruction">Match the lowercase letter to the uppercase letter!</p>
+                
+                <div class="letter-objects" id="letter-objects">
+                    <!-- Letters will be generated here -->
+                </div>
+                
+                <div class="letter-buttons" id="letter-buttons">
+                    <!-- Letter buttons will be generated here -->
+                </div>
+                
+                <div class="answer-section">
+                    <button class="submit-button" onclick="checkEnglishAnswer()">Check Answer</button>
+                </div>
+                
+                <div class="feedback" id="english-feedback"></div>
+            </div>
+            
+            <div class="tutor-section">
+                <div class="tutor-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="tutor-message" id="english-tutor-message">
+                    <p>Letters are fun! Let's match the uppercase and lowercase letters!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Poems Game Screen -->
+        <div id="poems-game" class="game-screen">
+            <div class="game-header">
+                <button class="back-button" onclick="showDashboard()">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+                <h2>Poetry Corner</h2>
+                <div class="score-display">Score: <span id="poem-score">0</span>/5</div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="poem-progress" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">Question <span id="poem-current">1</span> of 5</div>
+            </div>
+
+            <div class="game-content poems-game">
+                <h3 class="game-title" id="poem-title">Twinkle Twinkle Little Star</h3>
+                
+                <div class="poem-container" id="poem-container">
+                    <!-- Poem will be displayed here -->
+                </div>
+                
+                <div class="word-options" id="word-options">
+                    <!-- Word options will be generated here -->
+                </div>
+                
+                <div class="answer-section">
+                    <button class="submit-button" onclick="checkPoemAnswer()">Check Answer</button>
+                    <button class="submit-button" onclick="nextPoemLine()" style="background: #6c757d;">Next Line</button>
+                </div>
+                
+                <div class="feedback" id="poem-feedback"></div>
+            </div>
+            
+            <div class="tutor-section">
+                <div class="tutor-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="tutor-message" id="poem-tutor-message">
+                    <p>Poems are like songs without music! Let's complete this poem together!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Constitution Heroes Menu -->
+        <div id="constitution-menu" class="game-screen">
+            <div class="game-header">
+                <button class="back-button" onclick="showDashboard()">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+                <h2>CIAO</h2>
+                <div class="score-display">Score: <span id="constitution-score">0</span>/20</div>
+            </div>
+
+            <div class="game-content">
+                <h3 style="text-align: center; margin-bottom: 30px; color: #333;">Choose Your Constitutional Adventure!</h3>
+                
+                <div class="games-grid">
+                    <div class="game-card rights-hero" onclick="startConstitutionGame('rights-hero')">
+                        <div class="game-icon">🦸‍♂️</div>
+                        <div class="game-title">Rights Hero</div>
+                        <div class="game-description">Become a superhero who protects people's rights! Learn about freedom of speech, privacy, and fair treatment.</div>
+                    </div>
+
+                    <div class="game-card scenario-solver" onclick="startConstitutionGame('scenario-solver')">
+                        <div class="game-icon">🤔</div>
+                        <div class="game-title">What Would You Do?</div>
+                        <div class="game-description">Solve real-life situations using constitutional principles. Make fair decisions and learn about justice!</div>
+                    </div>
+
+                    <div class="game-card democracy-builder" onclick="startConstitutionGame('democracy-builder')">
+                        <div class="game-icon">🗳️</div>
+                        <div class="game-title">Democracy Builder</div>
+                        <div class="game-description">Build your own classroom democracy! Vote on rules and learn how everyone's voice matters.</div>
+                    </div>
+
+                    <div class="game-card constitution-quiz" onclick="startConstitutionGame('constitution-quiz')">
+                        <div class="game-icon">🧠</div>
+                        <div class="game-title">Constitution Quiz</div>
+                        <div class="game-description">Test your knowledge about rights, government, and how our country works!</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 15px;">
+                    <h3 style="color: #667eea; margin-bottom: 15px;">🌟 Learning Goals</h3>
+                    <p style="color: #666; font-size: 1.1rem; line-height: 1.6;">
+                        Understand your basic rights • Learn about fairness and equality • 
+                        Discover how democracy works • Practice making good decisions
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rights Hero Game -->
+        <div class="game-screen" id="rights-hero-game">
+            <div class="game-header">
+                <button class="back-button" onclick="showConstitutionMenu()">
+                    <i class="fas fa-arrow-left"></i> Back to Menu
+                </button>
+                <h2>Rights Hero</h2>
+                <div class="score-display">Score: <span id="rights-score">0</span>/5</div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="rights-progress" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">Question <span id="rights-current">1</span> of 5</div>
+            </div>
+
+            <div class="game-content">
+                <div class="hero-character">🦸‍♂️</div>
+                <h3 style="text-align: center; margin-bottom: 20px; color: #ff6b6b;">Super Rights Hero Mission!</h3>
+                
+                <div id="rights-scenario" style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
+                    <p id="rights-situation" style="font-size: 1.2rem; color: #333;"></p>
+                </div>
+
+                <div class="rights-list" id="rights-options">
+                    <!-- Rights options will be populated here -->
+                </div>
+
+                <button class="submit-button" onclick="checkRightsAnswer()" disabled>Use This Right!</button>
+                
+                <div class="feedback" id="rights-feedback"></div>
+            </div>
+        </div>
+
+        <!-- Scenario Solver Game -->
+        <div class="game-screen" id="scenario-solver-game">
+            <div class="game-header">
+                <button class="back-button" onclick="showConstitutionMenu()">
+                    <i class="fas fa-arrow-left"></i> Back to Menu
+                </button>
+                <h2>What Would You Do?</h2>
+                <div class="score-display">Score: <span id="scenario-score">0</span>/5</div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="scenario-progress" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">Scenario <span id="scenario-current">1</span> of 5</div>
+            </div>
+
+            <div class="game-content">
+                <div class="scenario-container">
+                    <div class="scenario-image" id="scenario-image">🤔</div>
+                    <div class="scenario-text" id="scenario-text"></div>
+                </div>
+
+                <div class="options-grid" id="scenario-options">
+                    <!-- Options will be populated here -->
+                </div>
+
+                <button class="submit-button" onclick="checkScenarioAnswer()" disabled>Make This Choice!</button>
+                
+                <div class="feedback" id="scenario-feedback"></div>
+            </div>
+        </div>
+
+        <!-- Democracy Builder Game -->
+        <div class="game-screen" id="democracy-builder-game">
+            <div class="game-header">
+                <button class="back-button" onclick="showConstitutionMenu()">
+                    <i class="fas fa-arrow-left"></i> Back to Menu
+                </button>
+                <h2>Democracy Builder</h2>
+                <div class="score-display">Round: <span id="democracy-round">1</span>/3</div>
+            </div>
+
+            <div class="game-content">
+                <div class="voting-container">
+                    <div class="voting-topic">
+                        <h3 id="voting-topic-title"></h3>
+                        <p id="voting-topic-description" style="color: #666; font-size: 1.1rem;"></p>
+                    </div>
+
+                    <div class="vote-options" id="vote-options">
+                        <!-- Voting options will be populated here -->
+                    </div>
+
+                    <button class="submit-button" onclick="castVote()" disabled>Cast Your Vote!</button>
+
+                    <div class="vote-results" id="vote-results" style="display: none;">
+                        <h4 style="text-align: center; margin-bottom: 20px; color: #45b7d1;">Voting Results</h4>
+                        <div id="results-container"></div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="next-button" onclick="nextVotingRound()">Next Round</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Constitution Quiz Game -->
+        <div class="game-screen" id="constitution-quiz-game">
+            <div class="game-header">
+                <button class="back-button" onclick="showConstitutionMenu()">
+                    <i class="fas fa-arrow-left"></i> Back to Menu
+                </button>
+                <h2>Constitution Quiz</h2>
+                <div class="score-display">Score: <span id="quiz-score">0</span>/10</div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="quiz-progress" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">Question <span id="quiz-current">1</span> of 10</div>
+            </div>
+
+            <div class="game-content">
+                <div class="quiz-question">
+                    <div class="question-text" id="quiz-question-text"></div>
+                </div>
+
+                <div class="quiz-answers" id="quiz-answers">
+                    <!-- Quiz answers will be populated here -->
+                </div>
+
+                <button class="submit-button" onclick="checkQuizAnswer()" disabled>Submit Answer</button>
+                
+                <div class="feedback" id="quiz-feedback"></div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Made with ❤️ for kids around the world</p>
+            <p>Constitutional Heroes - Interactive Learning App</p>
+        </div>
+    </div>
+
+    <div class="celebration" id="celebration"></div>
+
+    <script>
+        // Current game state
+        let currentScreen = 'login';
+        let mathScore = 0;
+        let mathTotal = 0;
+        let correctAnswer = 0;
+        
+        let englishScore = 0;
+        let englishTotal = 0;
+        let currentLetter = '';
+        let selectedLetter = '';
+        
+        let poemScore = 0;
+        let poemTotal = 0;
+        let currentPoem = {};
+        let currentLineIndex = 0;
+        let selectedWord = '';
+        
+        // Constitutional Games State
+        let constitutionGameState = {
+            rightsHero: { current: 0, score: 0, total: 5 },
+            scenarioSolver: { current: 0, score: 0, total: 5 },
+            democracyBuilder: { round: 0, votes: {} },
+            constitutionQuiz: { current: 0, score: 0, total: 10 }
+        };
+
+        // Poems data
+        const poems = [
+            {
+                title: "Twinkle Twinkle Little Star",
+                lines: [
+                    "Twinkle, twinkle, little star,",
+                    "How I wonder what you are!",
+                    "Up above the world so high,",
+                    "Like a diamond in the sky.",
+                    "Twinkle, twinkle, little star,",
+                    "How I wonder what you are!"
+                ],
+                blanks: [
+                    {line: 0, word: 2, options: ["little", "big", "bright"]},
+                    {line: 2, word: 2, options: ["high", "low", "far"]},
+                    {line: 3, word: 3, options: ["diamond", "ruby", "sapphire"]}
+                ]
+            },
+            {
+                title: "Humpty Dumpty",
+                lines: [
+                    "Humpty Dumpty sat on a wall,",
+                    "Humpty Dumpty had a great fall;",
+                    "All the king's horses and all the king's men",
+                    "Couldn't put Humpty together again."
+                ],
+                blanks: [
+                    {line: 0, word: 3, options: ["wall", "chair", "floor"]},
+                    {line: 1, word: 4, options: ["fall", "slide", "jump"]},
+                    {line: 3, word: 4, options: ["together", "back", "right"]}
+                ]
+            },
+            {
+                title: "Itsy Bitsy Spider",
+                lines: [
+                    "The itsy bitsy spider climbed up the water spout.",
+                    "Down came the rain and washed the spider out.",
+                    "Out came the sun and dried up all the rain,",
+                    "And the itsy bitsy spider climbed up the spout again."
+                ],
+                blanks: [
+                    {line: 0, word: 3, options: ["climbed", "jumped", "crawled"]},
+                    {line: 1, word: 3, options: ["rain", "snow", "hail"]},
+                    {line: 2, word: 3, options: ["sun", "moon", "star"]}
+                ]
+            }
+        ];
+
+        // Constitutional Games Data
+        const rightsHeroData = [
+            {
+                situation: "Maria wants to start a school newspaper, but the principal says students can't write articles. What right protects Maria?",
+                options: [
+                    { text: "Freedom of Speech", icon: "💬", correct: true, explanation: "Freedom of speech means Maria can express her ideas through writing!" },
+                    { text: "Right to Privacy", icon: "🔒", correct: false, explanation: "Privacy protects personal information, not expressing ideas." },
+                    { text: "Right to Education", icon: "📚", correct: false, explanation: "Education is important, but this is about expressing ideas." }
+                ]
+            },
+            {
+                situation: "Tom's diary was taken and read without permission. Which right was violated?",
+                options: [
+                    { text: "Right to Privacy", icon: "🔒", correct: true, explanation: "Privacy means your personal things should stay personal!" },
+                    { text: "Freedom of Speech", icon: "💬", correct: false, explanation: "This isn't about speaking or expressing ideas." },
+                    { text: "Right to Fair Treatment", icon: "⚖️", correct: false, explanation: "This is about privacy, not fair treatment." }
+                ]
+            },
+            {
+                situation: "Sarah and Jake both want to be class president, but the teacher says only boys can run. What principle is being broken?",
+                options: [
+                    { text: "Equal Treatment", icon: "⚖️", correct: true, explanation: "Everyone should get the same opportunities regardless of gender!" },
+                    { text: "Freedom of Speech", icon: "💬", correct: false, explanation: "This is about fair opportunities, not speech." },
+                    { text: "Right to Privacy", icon: "🔒", correct: false, explanation: "This isn't about personal privacy." }
+                ]
+            },
+            {
+                situation: "Alex wants to practice their religion during lunch break, but is told they can't. What right supports Alex?",
+                options: [
+                    { text: "Religious Freedom", icon: "🕊️", correct: true, explanation: "Everyone can practice their religion peacefully!" },
+                    { text: "Right to Privacy", icon: "🔒", correct: false, explanation: "This is about religious practice, not privacy." },
+                    { text: "Freedom of Speech", icon: "💬", correct: false, explanation: "This is specifically about religious freedom." }
+                ]
+            },
+            {
+                situation: "Kim was punished without being told what they did wrong or getting a chance to explain. What principle was missed?",
+                options: [
+                    { text: "Due Process", icon: "⚖️", correct: true, explanation: "Due process means you get to know what you did wrong and explain your side!" },
+                    { text: "Freedom of Speech", icon: "💬", correct: false, explanation: "This is about fair procedures, not speech." },
+                    { text: "Right to Privacy", icon: "🔒", correct: false, explanation: "This isn't about privacy." }
+                ]
+            }
+        ];
+
+        const scenarioData = [
+            {
+                image: "🍎",
+                text: "You see someone taking another student's lunch without asking. What's the best thing to do?",
+                options: [
+                    { text: "Tell a teacher - this protects everyone's property rights", correct: true },
+                    { text: "Take someone else's lunch too - that's fair", correct: false },
+                    { text: "Ignore it - it's not your problem", correct: false }
+                ],
+                explanation: "Protecting everyone's belongings is important for a fair community!"
+            },
+            {
+                image: "🗣️",
+                text: "A classmate is sharing ideas you disagree with during show-and-tell. What should you do?",
+                options: [
+                    { text: "Listen respectfully and share your own ideas when it's your turn", correct: true },
+                    { text: "Interrupt and tell them they're wrong", correct: false },
+                    { text: "Make fun of their ideas", correct: false }
+                ],
+                explanation: "Everyone has the right to share their ideas, and we can disagree respectfully!"
+            },
+            {
+                image: "🎨",
+                text: "You want to draw something for the school art show, but someone says your style is 'wrong'. How do you respond?",
+                options: [
+                    { text: "Keep creating your art - you have the right to express yourself", correct: true },
+                    { text: "Copy someone else's style instead", correct: false },
+                    { text: "Give up on art altogether", correct: false }
+                ],
+                explanation: "Artistic expression is a form of free speech - your creativity matters!"
+            },
+            {
+                image: "🏃‍♀️",
+                text: "New rules say only certain kids can use the playground equipment. Is this fair?",
+                options: [
+                    { text: "No - everyone should have equal access to school facilities", correct: true },
+                    { text: "Yes - some kids are more important than others", correct: false },
+                    { text: "It doesn't matter - rules are rules", correct: false }
+                ],
+                explanation: "Equal treatment means everyone gets the same opportunities!"
+            },
+            {
+                image: "📱",
+                text: "Someone wants to look through your backpack without your permission. Should you let them?",
+                options: [
+                    { text: "No - you have a right to privacy with your personal belongings", correct: true },
+                    { text: "Yes - you have nothing to hide", correct: false },
+                    { text: "Only if they're your friend", correct: false }
+                ],
+                explanation: "Privacy rights protect your personal space and belongings!"
+            }
+        ];
+
+        const democracyData = [
+            {
+                title: "Classroom Pet Decision",
+                description: "Our class gets to choose a new classroom pet! Let's vote democratically.",
+                options: ["Hamster 🐹", "Fish 🐠", "Bird 🐦", "Rabbit 🐰"]
+            },
+            {
+                title: "Recess Activity Rules",
+                description: "We need to decide on new playground rules that are fair for everyone.",
+                options: ["Take turns every 5 minutes", "First come, first served", "Form teams and rotate", "Teachers decide who plays"]
+            },
+            {
+                title: "Class Project Topics",
+                description: "Choose what our next group project should focus on.",
+                options: ["Community Helpers", "Space Exploration", "Ocean Animals", "Healthy Living"]
+            }
+        ];
+
+        const quizData = [
+            {
+                question: "What does 'freedom of speech' mean?",
+                answers: [
+                    "You can say whatever you want to hurt others",
+                    "You can express your ideas and opinions respectfully",
+                    "Only adults can speak in public",
+                    "You must always agree with everyone"
+                ],
+                correct: 1,
+                explanation: "Freedom of speech means you can share your thoughts respectfully!"
+            },
+            {
+                question: "What is democracy?",
+                answers: [
+                    "One person makes all the decisions",
+                    "Everyone gets to vote and have a say",
+                    "Only smart people can vote",
+                    "Rules don't matter"
+                ],
+                correct: 1,
+                explanation: "In democracy, everyone's voice counts through voting!"
+            },
+            {
+                question: "Why do we have rules and laws?",
+                answers: [
+                    "To make life boring",
+                    "To help everyone get along fairly and safely",
+                    "Because adults like rules",
+                    "To punish people"
+                ],
+                correct: 1,
+                explanation: "Rules help create a fair and safe community for everyone!"
+            },
+            {
+                question: "What does 'equal treatment' mean?",
+                answers: [
+                    "Everyone gets exactly the same things",
+                    "Everyone is treated fairly regardless of differences",
+                    "Only some people deserve fairness",
+                    "Everyone must be exactly alike"
+                ],
+                correct: 1,
+                explanation: "Equal treatment means everyone deserves fairness and respect!"
+            },
+            {
+                question: "Who makes the laws in our country?",
+                answers: [
+                    "The President alone",
+                    "Elected representatives in Congress",
+                    "Judges in courts",
+                    "Police officers"
+                ],
+                correct: 1,
+                explanation: "Congress (our elected representatives) makes the laws!"
+            },
+            {
+                question: "What is the Constitution?",
+                answers: [
+                    "A history book",
+                    "The supreme law that explains our rights and government",
+                    "A collection of stories",
+                    "Rules only for adults"
+                ],
+                correct: 1,
+                explanation: "The Constitution is our country's most important set of laws!"
+            },
+            {
+                question: "What does 'due process' mean?",
+                answers: [
+                    "Getting in trouble quickly",
+                    "Being told what you did wrong and getting a chance to explain",
+                    "Only adults get explanations",
+                    "Punishment without questions"
+                ],
+                correct: 1,
+                explanation: "Due process ensures fair treatment when there's a problem!"
+            },
+            {
+                question: "Why is voting important?",
+                answers: [
+                    "It's just for fun",
+                    "It lets people choose their leaders and make decisions together",
+                    "Only certain people should vote",
+                    "Voting doesn't change anything"
+                ],
+                correct: 1,
+                explanation: "Voting is how we participate in democracy and choose our representatives!"
+            },
+            {
+                question: "What should you do if you see someone being treated unfairly?",
+                answers: [
+                    "Ignore it and walk away",
+                    "Speak up respectfully or tell a trusted adult",
+                    "Join in the unfair treatment",
+                    "Laugh at the situation"
+                ],
+                correct: 1,
+                explanation: "Standing up for fairness helps protect everyone's rights!"
+            },
+            {
+                question: "Which of these is a responsibility of citizens?",
+                answers: [
+                    "Following laws and being respectful to others",
+                    "Only caring about yourself",
+                    "Never asking questions",
+                    "Avoiding community activities"
+                ],
+                correct: 0,
+                explanation: "Good citizens follow laws and treat others with respect!"
+            }
+        ];
+
+        // Show splash screen first
+        function showSplashScreen() {
+            document.getElementById('splash-screen').style.display = 'flex';
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard-screen').style.display = 'none';
+            
+            // Hide splash screen after 3 seconds
+            setTimeout(() => {
+                document.getElementById('splash-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('splash-screen').style.display = 'none';
+                    document.getElementById('login-screen').style.display = 'flex';
+                }, 500);
+            }, 3000);
+        }
+
+        // Show login form based on tab selection
+        function showLoginForm(formType) {
+            document.querySelectorAll('.login-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.login-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            
+            event.currentTarget.classList.add('active');
+            document.getElementById(formType + '-form').classList.add('active');
+        }
+        
+        // Login function
+        function login() {
+            // In a real app, you would validate credentials here
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard-screen').style.display = 'flex';
+            currentScreen = 'dashboard';
+        }
+        
+        // Signup function
+        function signup() {
+            // In a real app, you would create a new account here
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard-screen').style.display = 'flex';
+            currentScreen = 'dashboard';
+        }
+        
+        // Skip login function
+        function skipLogin() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard-screen').style.display = 'flex';
+            currentScreen = 'dashboard';
+        }
+        
+        // Logout function
+        function logout() {
+            document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('dashboard-screen').style.display = 'none';
+            document.querySelectorAll('.game-screen').forEach(screen => {
+                screen.style.display = 'none';
+            });
+            currentScreen = 'login';
+        }
+        
+        // Show section in dashboard
+        function showSection(section) {
+            // Hide all game screens first
+            document.querySelectorAll('.game-screen').forEach(screen => {
+                screen.style.display = 'none';
+            });
+            
+            // Show dashboard
+            document.getElementById('dashboard-screen').style.display = 'flex';
+            
+            // In a real app, you would show the selected section
+            alert('Showing ' + section + ' section');
+        }
+        
+        // Show game screen
+        function showGame(game) {
+            // Hide dashboard and other game screens
+            document.getElementById('dashboard-screen').style.display = 'none';
+            document.querySelectorAll('.game-screen').forEach(screen => {
+                screen.style.display = 'none';
+            });
+            
+            // Show the selected game
+            if (game === 'constitution') {
+                document.getElementById('constitution-menu').style.display = 'flex';
+            } else {
+                document.getElementById(game + '-game').style.display = 'block';
+                
+                // Initialize the game
+                if (game === 'math') {
+                    generateMathProblem();
+                    document.querySelector('#math-game .tutor-message p').textContent = 
+                        "Great choice! Math is fun! Let's count these cute objects together!";
+                } else if (game === 'english') {
+                    generateEnglishGame();
+                    document.querySelector('#english-game .tutor-message p').textContent = 
+                        "Letters are fun! Let's match the uppercase and lowercase letters!";
+                } else if (game === 'poems') {
+                    generatePoemGame();
+                    document.querySelector('#poems-game .tutor-message p').textContent = 
+                        "Poems are like songs without music! Let's complete this poem together!";
+                }
+            }
+            
+            currentScreen = game;
+        }
+        
+        // Show dashboard from game screen
+        function showDashboard() {
+            document.querySelectorAll('.game-screen').forEach(screen => {
+                screen.style.display = 'none';
+            });
+            document.getElementById('dashboard-screen').style.display = 'flex';
+            currentScreen = 'dashboard';
+        }
+        
+        // Show Constitution menu
+        function showConstitutionMenu() {
+            document.querySelectorAll('.game-screen').forEach(screen => {
+                screen.style.display = 'none';
+            });
+            document.getElementById('constitution-menu').style.display = 'flex';
+            currentScreen = 'constitution';
+        }
+        
+        // Start a constitutional game
+        function startConstitutionGame(gameType) {
+            document.getElementById('constitution-menu').style.display = 'none';
+            document.getElementById(gameType + '-game').style.display = 'flex';
+            
+            // Initialize specific games
+            switch(gameType) {
+                case 'rights-hero':
+                    initRightsHero();
+                    break;
+                case 'scenario-solver':
+                    initScenarioSolver();
+                    break;
+                case 'democracy-builder':
+                    initDemocracyBuilder();
+                    break;
+                case 'constitution-quiz':
+                    initConstitutionQuiz();
+                    break;
+            }
+            
+            currentScreen = gameType;
+        }
+
+        // Generate a new math problem
+        function generateMathProblem() {
+            const count = Math.floor(Math.random() * 10) + 1; // Random number between 1-10
+            const objectsContainer = document.getElementById('counting-objects');
+            objectsContainer.innerHTML = '';
+            
+            // Select a random object emoji
+            const emojis = ['🐶', '🐱', '🐰', '🐻', '🐢', '🐦', '🐠', '🦋', '🦄', '🐙', '🚗', '🍎', '🌟'];
+            const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            // Create the objects to count
+            for (let i = 0; i < count; i++) {
+                const object = document.createElement('div');
+                object.className = 'counting-object';
+                object.textContent = emoji;
+                // Add random delay to animations
+                object.style.animationDelay = `${i * 0.2}s`;
+                objectsContainer.appendChild(object);
+            }
+            
+            correctAnswer = count;
+            
+            // Clear previous answer and feedback
+            document.getElementById('math-answer').value = '';
+            document.getElementById('math-feedback').textContent = '';
+            document.getElementById('math-feedback').className = 'feedback';
+        }
+        
+        // Check the math answer
+        function checkMathAnswer() {
+            const input = document.getElementById('math-answer');
+            const feedback = document.getElementById('math-feedback');
+            
+            if (input.value === '') {
+                feedback.textContent = 'Please enter a number!';
+                feedback.className = 'feedback incorrect';
+                return;
+            }
+            
+            const userAnswer = parseInt(input.value);
+            mathTotal++;
+            
+            if (userAnswer === correctAnswer) {
+                feedback.textContent = 'Correct! Well done! 🎉';
+                feedback.className = 'feedback correct';
+                mathScore++;
+                
+                // Create confetti effect
+                createConfetti();
+                
+                // Update tutor message
+                const messages = [
+                    "Wow! You're great at counting!",
+                    "You're a math superstar! 🌟",
+                    "Perfect! You're learning so fast!",
+                    "Excellent counting skills!"
+                ];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                document.querySelector('#math-game .tutor-message p').textContent = randomMessage;
+            } else {
+                feedback.textContent = `Oops! There are ${correctAnswer} objects. Try again!`;
+                feedback.className = 'feedback incorrect';
+                
+                // Encouraging message
+                const messages = [
+                    "Almost! Let's try again!",
+                    "You can do it! Try counting one more time!",
+                    "Don't worry! Counting takes practice!",
+                    "Let's count together slowly!"
+                ];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                document.querySelector('#math-game .tutor-message p').textContent = randomMessage;
+            }
+            
+            // Update progress
+            const progress = (mathTotal > 0) ? (mathScore / mathTotal) * 100 : 0;
+            document.getElementById('math-progress').style.width = `${progress}%`;
+            document.getElementById('math-score').textContent = mathScore;
+            document.getElementById('math-current').textContent = mathTotal;
+            
+            // Generate a new problem after a short delay
+            setTimeout(generateMathProblem, 3000);
+        }
+        
+        // Generate English game
+        function generateEnglishGame() {
+            // Uppercase and lowercase letters
+            const letters = [
+                { upper: 'A', lower: 'a' },
+                { upper: 'B', lower: 'b' },
+                { upper: 'C', lower: 'c' },
+                { upper: 'D', lower: 'd' },
+                { upper: 'E', lower: 'e' },
+                { upper: 'F', lower: 'f' },
+                { upper: 'G', lower: 'g' },
+                { upper: 'H', lower: 'h' },
+                { upper: 'I', lower: 'i' },
+                { upper: 'J', lower: 'j' }
+            ];
+            
+            // Select a random letter
+            const randomIndex = Math.floor(Math.random() * letters.length);
+            currentLetter = letters[randomIndex];
+            selectedLetter = '';
+            
+            // Display the uppercase letter
+            const letterContainer = document.getElementById('letter-objects');
+            letterContainer.innerHTML = '';
+            
+            const letterElement = document.createElement('div');
+            letterElement.className = 'letter-object';
+            letterElement.textContent = currentLetter.upper;
+            letterElement.style.animationDelay = '0s';
+            letterContainer.appendChild(letterElement);
+            
+            // Generate lowercase letter buttons
+            const buttonsContainer = document.getElementById('letter-buttons');
+            buttonsContainer.innerHTML = '';
+            
+            // Shuffle the letters
+            const shuffledLetters = [...letters].sort(() => Math.random() - 0.5);
+            
+            for (const letter of shuffledLetters) {
+                const button = document.createElement('button');
+                button.className = 'letter-button';
+                button.textContent = letter.lower;
+                button.onclick = () => selectLetter(letter.lower);
+                buttonsContainer.appendChild(button);
+            }
+            
+            // Clear feedback
+            document.getElementById('english-feedback').textContent = '';
+            document.getElementById('english-feedback').className = 'feedback';
+        }
+        
+        // Select a letter in the English game
+        function selectLetter(letter) {
+            selectedLetter = letter;
+            
+            // Highlight the selected button
+            const buttons = document.querySelectorAll('.letter-button');
+            buttons.forEach(button => {
+                if (button.textContent === letter) {
+                    button.classList.add('selected-word');
+                } else {
+                    button.classList.remove('selected-word');
+                }
+            });
+        }
+        
+        // Check English answer
+        function checkEnglishAnswer() {
+            const feedback = document.getElementById('english-feedback');
+            
+            if (selectedLetter === '') {
+                feedback.textContent = 'Please select a letter!';
+                feedback.className = 'feedback incorrect';
+                return;
+            }
+            
+            englishTotal++;
+            
+            if (selectedLetter === currentLetter.lower) {
+                feedback.textContent = 'Correct! Well done! 🎉';
+                feedback.className = 'feedback correct';
+                englishScore++;
+                
+                // Create confetti effect
+                createConfetti();
+                
+                // Update tutor message
+                const messages = [
+                    "Wow! You know your letters!",
+                    "You're a letter expert! 🌟",
+                    "Perfect! You're learning so fast!",
+                    "Excellent letter matching skills!"
+                ];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                document.querySelector('#english-game .tutor-message p').textContent = randomMessage;
+            } else {
+                feedback.textContent = `Oops! The correct letter is ${currentLetter.lower}. Try again!`;
+                feedback.className = 'feedback incorrect';
+                
+                // Encouraging message
+                const messages = [
+                    "Almost! Let's try again!",
+                    "You can do it! Try one more time!",
+                    "Don't worry! Learning letters takes practice!",
+                    "Let's try together!"
+                ];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                document.querySelector('#english-game .tutor-message p').textContent = randomMessage;
+            }
+            
+            // Update progress
+            const progress = (englishTotal > 0) ? (englishScore / englishTotal) * 100 : 0;
+            document.getElementById('english-progress').style.width = `${progress}%`;
+            document.getElementById('english-score').textContent = englishScore;
+            document.getElementById('english-current').textContent = englishTotal;
+            
+            // Generate a new problem after a short delay
+            setTimeout(generateEnglishGame, 3000);
+        }
+        
+        // Generate Poem game
+        function generatePoemGame() {
+            // Select a random poem
+            const randomIndex = Math.floor(Math.random() * poems.length);
+            currentPoem = poems[randomIndex];
+            currentLineIndex = 0;
+            selectedWord = '';
+            
+            // Display poem title
+            document.getElementById('poem-title').textContent = currentPoem.title;
+            
+            // Display the first line with blank
+            nextPoemLine();
+        }
+        
+        // Show next poem line with blank
+        function nextPoemLine() {
+            const poemContainer = document.getElementById('poem-container');
+            const wordOptions = document.getElementById('word-options');
+            const feedback = document.getElementById('poem-feedback');
+            
+            // Clear previous feedback
+            feedback.textContent = '';
+            feedback.className = 'feedback';
+            
+            // Check if we've completed all blanks
+            if (currentLineIndex >= currentPoem.blanks.length) {
+                poemContainer.innerHTML = '';
+                
+                for (const line of currentPoem.lines) {
+                    const lineElement = document.createElement('div');
+                    lineElement.className = 'poem-line';
+                    lineElement.textContent = line;
+                    poemContainer.appendChild(lineElement);
+                }
+                
+                wordOptions.innerHTML = '';
+                feedback.textContent = 'You completed the poem! Great job! 🎉';
+                feedback.className = 'feedback correct';
+                
+                // Create confetti effect
+                createConfetti();
+                
+                // Update tutor message
+                document.querySelector('#poems-game .tutor-message p').textContent = 
+                    "You're a poetry superstar! Would you like to try another poem?";
+                
+                return;
+            }
+            
+            // Get current blank
+            const blank = currentPoem.blanks[currentLineIndex];
+            const line = currentPoem.lines[blank.line];
+            const words = line.split(' ');
+            
+            // Create the poem line with blank
+            poemContainer.innerHTML = '';
+            const lineElement = document.createElement('div');
+            lineElement.className = 'poem-line';
+            
+            for (let i = 0; i < words.length; i++) {
+                if (i === blank.word) {
+                    const blankSpan = document.createElement('span');
+                    blankSpan.textContent = '________';
+                    blankSpan.style.textDecoration = 'underline';
+                    blankSpan.style.fontWeight = 'bold';
+                    lineElement.appendChild(blankSpan);
+                } else {
+                    lineElement.appendChild(document.createTextNode(words[i]));
+                }
+                
+                if (i < words.length - 1) {
+                    lineElement.appendChild(document.createTextNode(' '));
+                }
+            }
+            
+            poemContainer.appendChild(lineElement);
+            
+            // Create word options
+            wordOptions.innerHTML = '';
+            
+            // Shuffle the options
+            const shuffledOptions = [...blank.options].sort(() => Math.random() - 0.5);
+            
+            for (const option of shuffledOptions) {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'word-option';
+                optionElement.textContent = option;
+                optionElement.onclick = () => selectWord(option);
+                wordOptions.appendChild(optionElement);
+            }
+            
+            // Reset selected word
+            selectedWord = '';
+        }
+        
+        // Select a word in the Poem game
+        function selectWord(word) {
+            selectedWord = word;
+            
+            // Highlight the selected word
+            const options = document.querySelectorAll('.word-option');
+            options.forEach(option => {
+                if (option.textContent === word) {
+                    option.classList.add('selected-word');
+                } else {
+                    option.classList.remove('selected-word');
+                }
+            });
+        }
+        
+        // Check Poem answer
+        function checkPoemAnswer() {
+            const feedback = document.getElementById('poem-feedback');
+            
+            if (selectedWord === '') {
+                feedback.textContent = 'Please select a word!';
+                feedback.className = 'feedback incorrect';
+                return;
+            }
+            
+            poemTotal++;
+            
+            const blank = currentPoem.blanks[currentLineIndex];
+            const correctWord = blank.options[0]; // First option is always the correct one
+            
+            if (selectedWord === correctWord) {
+                feedback.textContent = 'Correct! Well done! 🎉';
+                feedback.className = 'feedback correct';
+                poemScore++;
+                
+                // Update the poem line with the correct word
+                const line = currentPoem.lines[blank.line];
+                const words = line.split(' ');
+                words[blank.word] = correctWord;
+                currentPoem.lines[blank.line] = words.join(' ');
+                
+                // Move to next line
+                currentLineIndex++;
+                
+                // Create confetti effect
+                createConfetti();
+                
+                // Update tutor message
+                const messages = [
+                    "Wow! You're great at poetry!",
+                    "You're a poetry expert! 🌟",
+                    "Perfect! You're learning so fast!",
+                    "Excellent poetry skills!"
+                ];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                document.querySelector('#poems-game .tutor-message p').textContent = randomMessage;
+            } else {
+                feedback.textContent = `Oops! The correct word is "${correctWord}". Try again!`;
+                feedback.className = 'feedback incorrect';
+                
+                // Encouraging message
+                const messages = [
+                    "Almost! Let's try again!",
+                    "You can do it! Try one more time!",
+                    "Don't worry! Poetry takes practice!",
+                    "Let's try together!"
+                ];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                document.querySelector('#poems-game .tutor-message p').textContent = randomMessage;
+            }
+            
+            // Update progress
+            const progress = (poemTotal > 0) ? (poemScore / poemTotal) * 100 : 0;
+            document.getElementById('poem-progress').style.width = `${progress}%`;
+            document.getElementById('poem-score').textContent = poemScore;
+            document.getElementById('poem-current').textContent = poemTotal;
+        }
+        
+        // Rights Hero Game Functions
+        function initRightsHero() {
+            constitutionGameState.rightsHero = { current: 0, score: 0, total: 5 };
+            updateRightsProgress();
+            loadRightsQuestion();
+        }
+
+        function loadRightsQuestion() {
+            const data = rightsHeroData[constitutionGameState.rightsHero.current];
+            document.getElementById('rights-situation').textContent = data.situation;
+            
+            const optionsContainer = document.getElementById('rights-options');
+            optionsContainer.innerHTML = '';
+            
+            data.options.forEach((option, index) => {
+                const card = document.createElement('div');
+                card.className = 'right-card';
+                card.innerHTML = `
+                    <div class="icon">${option.icon}</div>
+                    <div style="font-weight: bold;">${option.text}</div>
+                `;
+                card.onclick = () => selectRightsOption(index);
+                optionsContainer.appendChild(card);
+            });
+            
+            document.querySelector('#rights-hero-game .submit-button').disabled = true;
+        }
+
+        function selectRightsOption(index) {
+            document.querySelectorAll('.right-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelectorAll('.right-card')[index].classList.add('selected');
+            document.querySelector('#rights-hero-game .submit-button').disabled = false;
+            constitutionGameState.rightsHero.selectedOption = index;
+        }
+
+        function checkRightsAnswer() {
+            const data = rightsHeroData[constitutionGameState.rightsHero.current];
+            const selectedIndex = constitutionGameState.rightsHero.selectedOption;
+            const feedback = document.getElementById('rights-feedback');
+            
+            if (data.options[selectedIndex].correct) {
+                constitutionGameState.rightsHero.score++;
+                feedback.className = 'feedback correct';
+                feedback.textContent = '🎉 Correct! ' + data.options[selectedIndex].explanation;
+                createConfetti();
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = '❌ ' + data.options[selectedIndex].explanation + ' The correct answer was: ' + 
+                    data.options.find(opt => opt.correct).text;
+            }
+            
+            feedback.style.display = 'block';
+            document.getElementById('rights-score').textContent = constitutionGameState.rightsHero.score;
+            
+            setTimeout(() => {
+                constitutionGameState.rightsHero.current++;
+                if (constitutionGameState.rightsHero.current < constitutionGameState.rightsHero.total) {
+                    updateRightsProgress();
+                    loadRightsQuestion();
+                    feedback.style.display = 'none';
+                } else {
+                    showGameComplete('Rights Hero', constitutionGameState.rightsHero.score, constitutionGameState.rightsHero.total);
+                }
+            }, 3000);
+        }
+
+        function updateRightsProgress() {
+            const progress = (constitutionGameState.rightsHero.current / constitutionGameState.rightsHero.total) * 100;
+            document.getElementById('rights-progress').style.width = progress + '%';
+            document.getElementById('rights-current').textContent = constitutionGameState.rightsHero.current + 1;
+        }
+
+        // Scenario Solver Functions
+        function initScenarioSolver() {
+            constitutionGameState.scenarioSolver = { current: 0, score: 0, total: 5 };
+            updateScenarioProgress();
+            loadScenarioQuestion();
+        }
+
+        function loadScenarioQuestion() {
+            const data = scenarioData[constitutionGameState.scenarioSolver.current];
+            document.getElementById('scenario-image').textContent = data.image;
+            document.getElementById('scenario-text').textContent = data.text;
+            
+            const optionsContainer = document.getElementById('scenario-options');
+            optionsContainer.innerHTML = '';
+            
+            data.options.forEach((option, index) => {
+                const card = document.createElement('div');
+                card.className = 'option-card';
+                card.textContent = option.text;
+                card.onclick = () => selectScenarioOption(index);
+                optionsContainer.appendChild(card);
+            });
+            
+            document.querySelector('#scenario-solver-game .submit-button').disabled = true;
+        }
+
+        function selectScenarioOption(index) {
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelectorAll('.option-card')[index].classList.add('selected');
+            document.querySelector('#scenario-solver-game .submit-button').disabled = false;
+            constitutionGameState.scenarioSolver.selectedOption = index;
+        }
+
+        function checkScenarioAnswer() {
+            const data = scenarioData[constitutionGameState.scenarioSolver.current];
+            const selectedIndex = constitutionGameState.scenarioSolver.selectedOption;
+            const feedback = document.getElementById('scenario-feedback');
+            const options = document.querySelectorAll('.option-card');
+            
+            options.forEach((card, index) => {
+                if (data.options[index].correct) {
+                    card.classList.add('correct');
+                } else if (index === selectedIndex) {
+                    card.classList.add('incorrect');
+                }
+            });
+            
+            if (data.options[selectedIndex].correct) {
+                constitutionGameState.scenarioSolver.score++;
+                feedback.className = 'feedback correct';
+                feedback.textContent = '🎉 Great choice! ' + data.explanation;
+                createConfetti();
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = '❌ Try thinking about what would be most fair. ' + data.explanation;
+            }
+            
+            feedback.style.display = 'block';
+            document.getElementById('scenario-score').textContent = constitutionGameState.scenarioSolver.score;
+            
+            setTimeout(() => {
+                constitutionGameState.scenarioSolver.current++;
+                if (constitutionGameState.scenarioSolver.current < constitutionGameState.scenarioSolver.total) {
+                    updateScenarioProgress();
+                    loadScenarioQuestion();
+                    feedback.style.display = 'none';
+                } else {
+                    showGameComplete('Scenario Solver', constitutionGameState.scenarioSolver.score, constitutionGameState.scenarioSolver.total);
+                }
+            }, 3000);
+        }
+
+        function updateScenarioProgress() {
+            const progress = (constitutionGameState.scenarioSolver.current / constitutionGameState.scenarioSolver.total) * 100;
+            document.getElementById('scenario-progress').style.width = progress + '%';
+            document.getElementById('scenario-current').textContent = constitutionGameState.scenarioSolver.current + 1;
+        }
+
+        // Democracy Builder Functions
+        function initDemocracyBuilder() {
+            constitutionGameState.democracyBuilder = { round: 0, votes: {} };
+            loadVotingRound();
+        }
+
+        function loadVotingRound() {
+            if (constitutionGameState.democracyBuilder.round >= democracyData.length) {
+                showDemocracyComplete();
+                return;
+            }
+            
+            const data = democracyData[constitutionGameState.democracyBuilder.round];
+            document.getElementById('voting-topic-title').textContent = data.title;
+            document.getElementById('voting-topic-description').textContent = data.description;
+            document.getElementById('democracy-round').textContent = constitutionGameState.democracyBuilder.round + 1;
+            
+            const optionsContainer = document.getElementById('vote-options');
+            optionsContainer.innerHTML = '';
+            
+            data.options.forEach((option, index) => {
+                const card = document.createElement('div');
+                card.className = 'vote-option';
+                card.textContent = option;
+                card.onclick = () => selectVoteOption(index);
+                optionsContainer.appendChild(card);
+            });
+            
+            document.getElementById('vote-results').style.display = 'none';
+            document.querySelector('#democracy-builder-game .submit-button').disabled = true;
+            constitutionGameState.democracyBuilder.selectedOption = null;
+        }
+
+        function selectVoteOption(index) {
+            document.querySelectorAll('.vote-option').forEach(card => {
+                card.classList.remove('voted');
+            });
+            document.querySelectorAll('.vote-option')[index].classList.add('voted');
+            document.querySelector('#democracy-builder-game .submit-button').disabled = false;
+            constitutionGameState.democracyBuilder.selectedOption = index;
+        }
+
+        function castVote() {
+            const selectedOption = constitutionGameState.democracyBuilder.selectedOption;
+            const data = democracyData[constitutionGameState.democracyBuilder.round];
+            
+            // Simulate other votes
+            const votes = [0, 0, 0, 0];
+            votes[selectedOption]++; // Player's vote
+            
+            // Add random votes from "other students"
+            for (let i = 0; i < 15; i++) {
+                const randomVote = Math.floor(Math.random() * data.options.length);
+                votes[randomVote]++;
+            }
+            
+            showVotingResults(data.options, votes);
+        }
+
+        function showVotingResults(options, votes) {
+            const resultsContainer = document.getElementById('results-container');
+            resultsContainer.innerHTML = '';
+            
+            const totalVotes = votes.reduce((a, b) => a + b, 0);
+            
+            options.forEach((option, index) => {
+                const percentage = Math.round((votes[index] / totalVotes) * 100);
+                
+                const resultBar = document.createElement('div');
+                resultBar.className = 'result-bar';
+                resultBar.innerHTML = `
+                    <div class="result-label">${option}</div>
+                    <div class="result-progress">
+                        <div class="result-fill" style="width: ${percentage}%"></div>
+                    </div>
+                    <div class="result-count">${votes[index]} votes</div>
+                `;
+                resultsContainer.appendChild(resultBar);
+            });
+            
+            document.getElementById('vote-results').style.display = 'block';
+            document.querySelector('#democracy-builder-game .submit-button').style.display = 'none';
+        }
+
+        function nextVotingRound() {
+            constitutionGameState.democracyBuilder.round++;
+            loadVotingRound();
+            document.querySelector('#democracy-builder-game .submit-button').style.display = 'block';
+        }
+
+        function showDemocracyComplete() {
+            alert('🎉 Congratulations! You\'ve learned about democratic voting and how everyone\'s voice matters in making decisions together!');
+            showConstitutionMenu();
+        }
+
+        // Constitution Quiz Functions
+        function initConstitutionQuiz() {
+            constitutionGameState.constitutionQuiz = { current: 0, score: 0, total: 10 };
+            updateQuizProgress();
+            loadQuizQuestion();
+        }
+
+        function loadQuizQuestion() {
+            const data = quizData[constitutionGameState.constitutionQuiz.current];
+            document.getElementById('quiz-question-text').textContent = data.question;
+            
+            const answersContainer = document.getElementById('quiz-answers');
+            answersContainer.innerHTML = '';
+            
+            data.answers.forEach((answer, index) => {
+                const answerDiv = document.createElement('div');
+                answerDiv.className = 'quiz-answer';
+                answerDiv.textContent = answer;
+                answerDiv.onclick = () => selectQuizAnswer(index);
+                answersContainer.appendChild(answerDiv);
+            });
+            
+            document.querySelector('#constitution-quiz-game .submit-button').disabled = true;
+        }
+
+        function selectQuizAnswer(index) {
+            document.querySelectorAll('.quiz-answer').forEach(answer => {
+                answer.classList.remove('selected');
+            });
+            document.querySelectorAll('.quiz-answer')[index].classList.add('selected');
+            document.querySelector('#constitution-quiz-game .submit-button').disabled = false;
+            constitutionGameState.constitutionQuiz.selectedAnswer = index;
+        }
+
+        function checkQuizAnswer() {
+            const data = quizData[constitutionGameState.constitutionQuiz.current];
+            const selectedIndex = constitutionGameState.constitutionQuiz.selectedAnswer;
+            const feedback = document.getElementById('quiz-feedback');
+            const answers = document.querySelectorAll('.quiz-answer');
+            
+            answers.forEach((answer, index) => {
+                if (index === data.correct) {
+                    answer.classList.add('correct');
+                } else if (index === selectedIndex) {
+                    answer.classList.add('incorrect');
+                }
+            });
+            
+            if (selectedIndex === data.correct) {
+                constitutionGameState.constitutionQuiz.score++;
+                feedback.className = 'feedback correct';
+                feedback.textContent = '🎉 Correct! ' + data.explanation;
+                createConfetti();
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = '❌ ' + data.explanation;
+            }
+            
+            feedback.style.display = 'block';
+            document.getElementById('quiz-score').textContent = constitutionGameState.constitutionQuiz.score;
+            
+            setTimeout(() => {
+                constitutionGameState.constitutionQuiz.current++;
+                if (constitutionGameState.constitutionQuiz.current < constitutionGameState.constitutionQuiz.total) {
+                    updateQuizProgress();
+                    loadQuizQuestion();
+                    feedback.style.display = 'none';
+                } else {
+                    showGameComplete('Constitution Quiz', constitutionGameState.constitutionQuiz.score, constitutionGameState.constitutionQuiz.total);
+                }
+            }, 3000);
+        }
+
+        function updateQuizProgress() {
+            const progress = (constitutionGameState.constitutionQuiz.current / constitutionGameState.constitutionQuiz.total) * 100;
+            document.getElementById('quiz-progress').style.width = progress + '%';
+            document.getElementById('quiz-current').textContent = constitutionGameState.constitutionQuiz.current + 1;
+        }
+
+        // Shared Functions
+        function showGameComplete(gameName, score, total) {
+            const percentage = Math.round((score / total) * 100);
+            let message = `🎉 ${gameName} Complete!\n\nScore: ${score}/${total} (${percentage}%)\n\n`;
+            
+            if (percentage >= 80) {
+                message += "Outstanding! You're a constitutional expert!";
+            } else if (percentage >= 60) {
+                message += "Great job! You're learning a lot about your rights!";
+            } else {
+                message += "Good effort! Keep learning about the Constitution!";
+            }
+            
+            createConfetti();
+            alert(message);
+            showConstitutionMenu();
+        }
+
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#fd79a8'];
+            const celebration = document.getElementById('celebration');
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                celebration.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+
+        // Initialize the application
+        window.onload = function() {
+            showSplashScreen();
+            
+            // Add event listener for Enter key in math answer input
+            document.getElementById('math-answer').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkMathAnswer();
+                }
+            });
+        };
+    </script>
+</body>
+</html>
